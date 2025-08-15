@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  telegram-scheduler-bot:
+    build: .
+    container_name: telegram-scheduler-bot
+    restart: unless-stopped
+    volumes:
+      - ./bot_data.db:/app/bot_data.db
+      - ./.env:/app/.env
+    environment:
+      - PYTHONUNBUFFERED=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
